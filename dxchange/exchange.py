@@ -961,6 +961,41 @@ def read_esrf_id19(fname, proj=None, sino=None):
     return tomo, flat, dark
 
 
+def read_esrf_id17(fname, proj=None, sino=None):
+    """
+    Read ESRF ID-17 standard data format.
+
+    Parameters
+    ----------
+    fname : str
+        Path to edf file.
+
+    proj : {sequence, int}, optional
+        Specify projections to read. (start, end, step)
+
+    sino : {sequence, int}, optional
+        Specify sinograms to read. (start, end, step)
+
+    Returns
+    -------
+    ndarray
+        3D tomographic data.
+
+    ndarray
+        3D flat field data.
+
+    ndarray
+        3D dark field data.
+    """
+    /scan0/image/instrument/detector_0/data
+    tomo = dxreader.read_hdf5('tomo.h5', '/scan0/image/instrument/detector_0/data', slc=(proj, sino))
+    flat = dxreader.read_hdf5('flat.h5', '/scan0/image/instrument/detector_0/data', slc=(None, sino))
+    dark = dxreader.read_hdf5('dark.h5', '/scan0/image/instrument/detector_0/data', slc=(None, sino))
+    
+    return tomo, flat, dark
+
+
+
 def read_diamond_l12(fname, ind_tomo, proj=None):
     """
     Read Diamond Light Source L12 (JEEP) standard data format.
