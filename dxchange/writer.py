@@ -58,6 +58,7 @@ import numpy as np
 import os
 import six
 import h5py
+import zarr
 import logging
 import re
 from itertools import cycle
