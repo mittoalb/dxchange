@@ -61,6 +61,7 @@ import re
 import fnmatch
 import logging
 import numpy as np
+import zarr
 import dxchange.reader as dxreader
 
 __authors__ = "Doga Gursoy, Luis Barroso-Luque, Francesco De Carlo"
