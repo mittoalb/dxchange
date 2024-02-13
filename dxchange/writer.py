@@ -565,3 +565,35 @@ def _normalize_imgstacks(img):
                                   ), 
                        axis=1,
                       ).reshape(img.shape[0],1,1)
+
+
+def writeAPSZarr(fname, proj, flat, dark, theta, meta):
+  # Create a structured Zarr file
+  root = zarr.open(fname, mode='w')
+  
+  # Create data for /test/data1 if it doesn't exist
+  group_test = root.require_group('exchange')
+  if 'data' not in group_test:
+    #data = np.random.rand(100, 100, 100)
+    group_test.create_dataset('data', data=proj)
+  
+  # Create data for /test/data2 if it doesn't exist
+  if 'data_white' not in group_test:
+    #data_flat = np.random.rand(100, 100, 10)
+    group_test.create_dataset('data_white', data=flat)
+  
+  if 'data_dark' not in group_test:
+    #data_dark = np.random.rand(100, 100, 10)
+    group_test.create_dataset('data_dark', data=dark)
+  
+  if 'theta' not in group_test:
+    #theta = np.random.rand(100)
+    group_test.create_dataset('theta', data=theta)
+  
+  group_D = root.require_group('default')
+  group_I = root.require_group('instrument')
+  group_P = root.require_group('process')
+  
+  
+  for key, value in meta.items():
+    root.attrs[key] = value
