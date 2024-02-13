@@ -74,6 +74,7 @@ __all__ = ['write_dxf',
            'write_tiff_stack',
            'write_vtr',
            'write_aps_1id_report',
+           'writeAPSZarr'
            ]
 
 logger = logging.getLogger(__name__)
