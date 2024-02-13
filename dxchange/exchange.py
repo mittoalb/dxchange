@@ -1069,7 +1069,19 @@ def read_esrf_id17(fname, proj=None, sino=None):
     
     return tomo, flat, dark
 
-
+def readAPSZarr(file_name, proj=None, sino=None):
+    root = zarr.open(file_name, mode='r')
+    
+    attributes_dict = {}
+    for key, value in root.attrs.items():
+      attributes_dict[key] = value
+      
+    if sino:
+      data = root['exchange/data'][:,sino[0]:sino[1],:]
+    if proj:
+      data = root['exchange/data'][proj[0]:proj[1],:,:]
+    
+    return data, root['exchange/data_white'], root['exchange/data_dark'], root['exchange/theta'], attributes_dict
 
 def read_diamond_l12(fname, ind_tomo, proj=None):
     """
