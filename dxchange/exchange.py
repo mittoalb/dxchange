@@ -90,7 +90,7 @@ __all__ = ['read_als_832',
            'read_sls_tomcat',
            'read_nexus',
            'read_esrf_id17',
-           'readAPSZarr]
+           'readAPSZarr']
 
 logger = logging.getLogger(__name__)
 
