@@ -1062,7 +1062,6 @@ def read_esrf_id17(fname, proj=None, sino=None):
     ndarray
         3D dark field data.
     """
-    /scan0/image/instrument/detector_0/data
     tomo = dxreader.read_hdf5('tomo.h5', '/scan0/image/instrument/detector_0/data', slc=(proj, sino))
     flat = dxreader.read_hdf5('flat.h5', '/scan0/image/instrument/detector_0/data', slc=(None, sino))
     dark = dxreader.read_hdf5('dark.h5', '/scan0/image/instrument/detector_0/data', slc=(None, sino))
